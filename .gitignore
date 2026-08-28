@@ -5,6 +5,13 @@ target/
 !**/src/test/**/target/
 # Build files
 
+.gitattributes
+.gitignore
+mvnw
+mvnw.cmd
+.mvn
+application.properties
+
 
 
 
