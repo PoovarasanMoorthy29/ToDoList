@@ -5,18 +5,11 @@ target/
 !**/src/test/**/target/
 # Build files
 
-/src/main/java/test
-
 
 
 
 *.class
-mvnw.cmd
-mvnw
-.mvn
-maven-wrapper.properties
-.gitattributes
-application.properties
+
 
 # IntelliJ IDEA
 .idea/
