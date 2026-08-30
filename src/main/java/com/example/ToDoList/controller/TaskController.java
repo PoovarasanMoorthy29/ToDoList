@@ -23,6 +23,16 @@ public class TaskController {
     public List<Task> getAllTask(){
         return service.getAllTasks();
     }
+    @PutMapping("/changeTitle")
+    public String changeTitleOfTask(@RequestBody Task task){
+        service.changeTitleOfTask(task);
+        return "Title Updated!";
+    }
+    @PutMapping("/change-description")
+    public String changeDescriptionOfTask(@RequestBody Task task){
+        service.changeDescriptionOfTask(task);
+        return "Title Updated!";
+    }
 
     @PutMapping("/markTaskcompleted/{id}")
     public String makeTaskCompleted(@PathVariable Integer id){

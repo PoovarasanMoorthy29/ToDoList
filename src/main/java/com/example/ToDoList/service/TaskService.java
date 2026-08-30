@@ -30,4 +30,16 @@ public class TaskService {
     public void deleteTaskById(Integer id) {
         iTaskRepository.deleteById(id);
     }
+
+    public void changeTitleOfTask(Task task) {
+        Task updateTask=iTaskRepository.findById(task.getId()).get();
+        updateTask.setTitle(task.getTitle());
+        iTaskRepository.save(updateTask);
+    }
+
+    public void changeDescriptionOfTask(Task task) {
+        Task updateTask=iTaskRepository.findById(task.getId()).get();
+        updateTask.setDescription(task.getDescription());
+        iTaskRepository.save(updateTask);
+    }
 }
