@@ -24,6 +24,10 @@ public class TaskController {
     public List<Task> getAllTask(){
         return service.getAllTasks();
     }
+    @GetMapping("/getTasks/{id}")
+    public Optional<Task> getTask(@PathVariable int id){
+        return service.getTaskById(id);
+    }
     @PutMapping("/changeTitle")
     public String changeTitleOfTask(@RequestBody Task task){
         service.changeTitleOfTask(task);

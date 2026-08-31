@@ -45,5 +45,7 @@ public class TaskService {
         iTaskRepository.save(updateTask);
     }
 
-
+    public Optional<Task> getTaskById(int id) {
+        return iTaskRepository.findById(id);
+    }
 }
