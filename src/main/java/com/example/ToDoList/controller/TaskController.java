@@ -3,6 +3,8 @@ package com.example.ToDoList.controller;
 import com.example.ToDoList.model.Task;
 import com.example.ToDoList.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -15,34 +17,40 @@ public class TaskController {
     TaskService service;
 
     @PostMapping
-    public String createNewTask(@RequestBody Task task){
+    public ResponseEntity<String> createNewTask(@RequestBody Task task){
         service.createTask(task);
-        return "Task Created!";
+        return new ResponseEntity<>("Task Created....",HttpStatus.CREATED);
     }
 
     @GetMapping
-    public List<Task> getAllTask(){
-        return service.getAllTasks();
+    public ResponseEntity<List<Task>> getAllTask(){
+        return new ResponseEntity<>(service.getAllTasks(),HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Optional<Task> getTaskByID(@PathVariable int id){
-        return service.getTaskById(id);
+    public ResponseEntity<Task> getTaskByID(@PathVariable int id){
+        Task task= service.getTaskById(id);
+        if(task!=null){
+            return new ResponseEntity<>(task,HttpStatus.OK);
+        }
+        else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
     @PutMapping("/{id}")
-    public String updateTask(@PathVariable int id ,@RequestBody Task task){
+    public ResponseEntity<String> updateTask(@PathVariable int id ,@RequestBody Task task){
         service.updateTask(id,task);
-        return "Task  Updated!";
+        return new ResponseEntity<>("Task Updated...", HttpStatus.OK);
     }
 
     @PutMapping("/{id}/complete")
-    public String makeTaskCompleted(@PathVariable Integer id){
+    public ResponseEntity<String>  makeTaskCompleted(@PathVariable Integer id){
         service.markTaskCompleted(id);
-        return "task completed!";
+        return new ResponseEntity<>("task completed!",HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-    public String deleteTaskById(@PathVariable Integer id){
+    public ResponseEntity<String> deleteTaskById(@PathVariable Integer id){
         service.deleteTaskById(id);
-        return "Task Deleted!";
+        return new ResponseEntity<>("Task Deleted!",HttpStatus.OK);
     }
 }
