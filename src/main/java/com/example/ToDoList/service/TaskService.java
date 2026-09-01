@@ -31,15 +31,11 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    public void changeTitleOfTask(Task task) {
-        Task updateTask= taskRepository.findById(task.getId()).orElse(new Task());
+    public void updateTask(int id , Task task) {
+        Task updateTask= taskRepository.findById(id).orElse(new Task());
         updateTask.setTitle(task.getTitle());
-        taskRepository.save(updateTask);
-    }
-
-    public void changeDescriptionOfTask(Task task) {
-        Task updateTask= taskRepository.findById(task.getId()).orElse(new Task());
         updateTask.setDescription(task.getDescription());
+        updateTask.setCompleted(task.isCompleted());
         taskRepository.save(updateTask);
     }
 

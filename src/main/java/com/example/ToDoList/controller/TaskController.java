@@ -8,48 +8,41 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/todolist")
+@RequestMapping("/api/v1/tasks")
 public class TaskController {
 
     @Autowired
     TaskService service;
 
-    @PostMapping("/create/newtask")
+    @PostMapping
     public String createNewTask(@RequestBody Task task){
         service.createTask(task);
         return "Task Created!";
     }
 
-    @GetMapping("/getAllTasks")
+    @GetMapping
     public List<Task> getAllTask(){
         return service.getAllTasks();
     }
-    @GetMapping("/getTasks/{id}")
-    public Optional<Task> getTask(@PathVariable int id){
+
+    @GetMapping("/{id}")
+    public Optional<Task> getTaskByID(@PathVariable int id){
         return service.getTaskById(id);
     }
-    @PutMapping("/changeTitle")
-    public String changeTitleOfTask(@RequestBody Task task){
-        service.changeTitleOfTask(task);
-        return "Title Updated!";
-    }
-    @PutMapping("/change-description")
-    public String changeDescriptionOfTask(@RequestBody Task task){
-        service.changeDescriptionOfTask(task);
-        return "Description Updated!";
+    @PutMapping("/{id}")
+    public String updateTask(@PathVariable int id ,@RequestBody Task task){
+        service.updateTask(id,task);
+        return "Task  Updated!";
     }
 
-    @PutMapping("/markTaskcompleted/{id}")
+    @PutMapping("/{id}/complete")
     public String makeTaskCompleted(@PathVariable Integer id){
         service.markTaskCompleted(id);
         return "task completed!";
     }
-    @DeleteMapping("/deleteTaskByID/{id}")
+    @DeleteMapping("/{id}")
     public String deleteTaskById(@PathVariable Integer id){
         service.deleteTaskById(id);
         return "Task Deleted!";
     }
-
-
-
 }
