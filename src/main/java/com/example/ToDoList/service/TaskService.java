@@ -11,39 +11,39 @@ import java.util.Optional;
 public class TaskService {
 
     @Autowired
-    ITaskRepository iTaskRepository;
+    ITaskRepository taskRepository;
 
     public void createTask(Task task) {
-        iTaskRepository.save(task);
+        taskRepository.save(task);
     }
 
     public List<Task> getAllTasks() {
-        return iTaskRepository.findAll();
+        return taskRepository.findAll();
     }
 
     public void markTaskCompleted(Integer id){
-        Task task = iTaskRepository.findById(id).orElse(new Task());
+        Task task = taskRepository.findById(id).orElse(new Task());
         task.setCompleted(true);
-        iTaskRepository.save(task);
+        taskRepository.save(task);
     }
 
     public void deleteTaskById(Integer id) {
-        iTaskRepository.deleteById(id);
+        taskRepository.deleteById(id);
     }
 
     public void changeTitleOfTask(Task task) {
-        Task updateTask=iTaskRepository.findById(task.getId()).orElse(new Task());
+        Task updateTask= taskRepository.findById(task.getId()).orElse(new Task());
         updateTask.setTitle(task.getTitle());
-        iTaskRepository.save(updateTask);
+        taskRepository.save(updateTask);
     }
 
     public void changeDescriptionOfTask(Task task) {
-        Task updateTask=iTaskRepository.findById(task.getId()).orElse(new Task());
+        Task updateTask= taskRepository.findById(task.getId()).orElse(new Task());
         updateTask.setDescription(task.getDescription());
-        iTaskRepository.save(updateTask);
+        taskRepository.save(updateTask);
     }
 
     public Optional<Task> getTaskById(int id) {
-        return iTaskRepository.findById(id);
+        return taskRepository.findById(id);
     }
 }
