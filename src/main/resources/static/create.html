@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDoList</title>
 </head>
-
 <body>
-
 <form id="taskForm">
 
     <label for="title">Title</label>
@@ -31,38 +29,32 @@
 
 <script>
 
-    const t = document.getElementById('title');
-    const d = document.getElementById('description');
-    const s = document.getElementById('status');
+    const title = document.getElementById('title');
+    const description = document.getElementById('description');
+    const status = document.getElementById('status');
 
     const form = document.getElementById('taskForm');
 
     form.addEventListener('submit', function(event) {
-
         event.preventDefault();
-
         fetch("http://localhost:8080/api/v1/tasks", {
-
             method: 'POST',
-
             headers: {
                 "Content-Type": "application/json"
             },
 
             body: JSON.stringify({
-                title: t.value,
-                description: d.value,
-                isCompleted: s.value === "true"
+                title: title.value,
+                description: description.value,
+                isCompleted: status.value === "true"
             })
 
         })
         .then(response => response.json())
-
         .then(data => {
             alert("Task created successfully");
             console.log(data);
         })
-
         .catch(error => {
             console.error("Error:", error);
         });
