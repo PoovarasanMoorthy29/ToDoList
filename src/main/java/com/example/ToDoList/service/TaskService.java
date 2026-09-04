@@ -30,7 +30,7 @@ public class TaskService {
         taskRepository.deleteById(id);
     }
 
-    public void updateTask(int id , Task task) {
+    public void updateTask(Integer id , Task task) {
         Task updateTask= taskRepository.findById(id).orElse(new Task());
         updateTask.setTitle(task.getTitle());
         updateTask.setDescription(task.getDescription());
@@ -38,7 +38,7 @@ public class TaskService {
         taskRepository.save(updateTask);
     }
 
-    public Task getTaskById(int id) {
+    public Task getTaskById(Integer id) {
         return taskRepository.findById(id).orElse(null);
     }
 }
